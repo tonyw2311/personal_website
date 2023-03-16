@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Sacramento&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .navbar-icon{
+        @apply relative flex items-center justify-center
+        h-10 w-auto mt-2 mb-2 mx-2 p-3 
+        bg-transparent text-white
+        hover:bg-green-600 hover:text-blue-200
+        rounded-md hover:rounded-xl
+        transition-all duration-100 ease-linear cursor-pointer;
+
+    }
+
+    .name-caligraphy{
+        @apply relative flex items-baseline justify-center
+        h-10 w-auto mt-2 mb-2 mx-2 p-3 mr-auto
+        text-4xl font-heading
+        
+        bg-transparent text-white
+        hover:text-blue-200
+        rounded-md hover:rounded-xl
+        transition-all duration-100 ease-linear;
+
+    }
+    html{
+        scroll-behavior: smooth;
+
+        @apply min-h-screen bg-gradient-to-br from-primary to-secondary flex overflow-hidden
+    }
+    img{
+        pointer-events: none;
+    }
+    .gradient-primary{
+        --tw-gradient-to: rgb(96,165,250/0);
+        --tw-gradient-stops:var(--tw-gradient-from), #60a5fa, #116534, var(--tw-gradient-to);
+    }
+
+
+
+    .gradient-nature{
+        --tw-gradient-stops: transparent,#60a5fa, #116534,transparent
+    }
+
+
+}
