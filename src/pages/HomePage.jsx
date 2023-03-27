@@ -2,6 +2,7 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import FadeIn from "../components/FadeIn"
 import DelayComponent from "../components/DelayComponent"
 import FadeInSlide from "../components/FadeInSlide"
+import { useRef, useState } from 'react'
 
 
 
@@ -26,6 +27,8 @@ import tailwind from "../images/technology/tailwind.svg"
 import vscode from "../images/technology/vscode.svg"
 import game24 from "../videos/game24.mp4"
 import wordle from "../videos/wordle.mp4"
+import MyButton from '../components/MyButton'
+
 
 
 
@@ -34,13 +37,17 @@ import wordle from "../videos/wordle.mp4"
 
 
 function HomePage() {
+    const ref = useRef();
+    const [isVisible, setIsVisible] = useState(false);
+    const [isShown, setIsShown] = useState(true);
+    const updateVisibility = () => setIsVisible(!isVisible)
 
     return (
 
         <div className="flex w-screen h-screen text-6xl text-white">
 
-            <Parallax pages={9}>
-                <ParallaxLayer>
+            <Parallax pages={8} ref={ref}>
+                <ParallaxLayer onClick={() => ref.current.scrollTo(.5)}>
                     <div className="grid content-center place-items-start ml-[20%] mt-[5%]">
                         <FadeIn>
                             <h1 className="absolute flex mt-[15%]">Hi there!</h1>
@@ -48,18 +55,21 @@ function HomePage() {
                         <DelayComponent>
                             <FadeIn>
                                 <h2 className="absolute flex mt-[20%]">My name is Anthony</h2>
+                                <p className='text-lg absolute flex mt-[25%]'>(Scroll to see more or click middle of screen for next!)</p>
                             </FadeIn>
                         </DelayComponent>
+
+
                     </div>
                 </ParallaxLayer>
 
-                <ParallaxLayer offset={1}>
+                <ParallaxLayer offset={1} onClick={() => ref.current.scrollTo(1.2)}>
                     <FadeInSlide>
                         <h1>Let me tell you more about me</h1>
                     </FadeInSlide>
                 </ParallaxLayer>
 
-                <ParallaxLayer offset={1.4}>
+                <ParallaxLayer offset={1.4} onClick={() => ref.current.scrollTo(3.7)}>
                     <FadeIn>
                         <div className="grid grid-cols-[20%_15%_50%_15%]">
                             <div></div>
@@ -73,9 +83,8 @@ function HomePage() {
                             </div>
                         </div>
                     </FadeIn>
-                    <br />
                     <FadeInSlide>
-                        <h1 className="mt-24">that enjoys programming</h1>
+                        <h1 className="mt-24">and I enjoy programming</h1>
                     </FadeInSlide>
                 </ParallaxLayer>
 
@@ -88,12 +97,12 @@ function HomePage() {
                     }}>
                 </ParallaxLayer>
                 <ParallaxLayer offset={2.4}>
-                    <FadeInSlide>
+                    <FadeIn>
                         <img src={cloud} className='h-80 absolute left-[20%] top-[25%] m-auto opacity-70' />
                         <img src={cloud} className='h-80 absolute m-auto left-[40%] top-48 opacity-80' />
                         <img src={cloud} className='h-80 absolute left-3 top-40 m-auto opacity-60' />
                         <img src={cloud} className='h-80 absolute right-[5%] top-32 m-auto opacity-80' />
-                    </FadeInSlide>
+                    </FadeIn>
                 </ParallaxLayer>
                 <ParallaxLayer offset={2.3} factor={2} speed={.7}
                     style={{
@@ -114,7 +123,7 @@ function HomePage() {
                     </FadeInSlide>
                 </ParallaxLayer>
 
-                <ParallaxLayer offset={4}>
+                <ParallaxLayer offset={4} onClick={() => ref.current.scrollTo(4.7)}>
                     <FadeIn>
                         <h1 className="text-5xl">Here are the languages I know:</h1>
                         <br />
@@ -141,7 +150,7 @@ function HomePage() {
                     </div>
                 </ParallaxLayer>
 
-                <ParallaxLayer offset={5}>
+                <ParallaxLayer offset={5} onClick={() => ref.current.scrollTo(5.8)}>
                     <FadeIn>
                         <h1 className="text-5xl">Here are some of the technologies I use:</h1>
                         <br />
@@ -174,7 +183,7 @@ function HomePage() {
                     </div>
                 </ParallaxLayer>
 
-                <ParallaxLayer offset={6}>
+                <ParallaxLayer offset={6} onClick={() => ref.current.scrollTo(7.5)}>
                     <FadeInSlide>
                         <h1 className="font-extrabold ml-10">Cool Projects</h1>
                         <hr className="w-1/2 mx-auto" />
@@ -186,34 +195,44 @@ function HomePage() {
                             <FadeIn>
                                 <h1>Wordle Automation</h1>
                             </FadeIn>
-                            <video src={wordle} className='m-10 w-10/12 border-8 border-primary border-solid'  />
+                            <video src={wordle} className='m-10 w-10/12 border-8 border-primary border-solid' controls />
                         </div>
 
                         <div className="grid justify-items-center">
                             <FadeIn>
                                 <h1>24 Game Web App</h1>
                             </FadeIn>
-                            <video src={game24} className='m-10 w-10/12 border-8 border-primary border-solid'  />
+                            <video src={game24} className='m-10 w-10/12 border-8 border-primary border-solid' controls />
                         </div>
                     </div>
 
                 </ParallaxLayer>
 
                 <ParallaxLayer offset={7.5}>
-                    <h1>There is a lot more to see!!!</h1>
+
+                    {isVisible ?
+                        <div>
+                            <FadeInSlide>
+                                <h1 >There is a lot more to see!!!</h1>
+                            </FadeInSlide>
+                            <FadeIn>
+                                <h1 className='fixed -top-[40%] left-3/4 text-3xl'><h1 className='text-6xl'>↑↑↑</h1><br/>Click these to see more</h1>
+                            </FadeIn>
+                        </div>
+                        :
+                        <div className='grid justify-items-center'>
+                            <MyButton onClick={updateVisibility}>Click Here</MyButton>
+                        </div>
+                    }
 
                 </ParallaxLayer>
-
-
-
-
             </Parallax>
         </div>
 
     )
 
 
-}
 
+}
 
 export default HomePage;

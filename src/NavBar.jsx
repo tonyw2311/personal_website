@@ -5,7 +5,8 @@ const NavBar =()=>{
     return(
         <div className="fixed top-0  left-0 h-16 w-screen m-0 z-50
         flex flex-row justify-end
-        text-white shadow-xl">
+        text-white shadow-xl
+        bg-transparent backdrop-blur-lg">
 
             <Name text={"Anthony Wong"}/>
 

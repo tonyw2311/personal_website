@@ -12,7 +12,7 @@ const FadeIn = ({children, delay})=>{
     return(
     <div className="m-0 text-center">
         <div ref={containerRef} className ={isVisible ? 
-        `opacity-100 transition-all duration-[1500ms] delay-[${delay}]`:
+        `opacity-100 transition-all duration-[1500ms] delay-[--hi]`:
         `opacity-0 transition-all duration-[1500ms] delay-[${delay}]`}>
             {children}
         </div>
